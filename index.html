@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Grand Bistro | Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+            --primary: #C0392B;        /* Deep Crimson (Appetite) */
+            --secondary: #2C3E50;      /* Midnight Blue (Luxury) */
+            --bg-body: #FDFCF0;        /* Warm Cream (Premium Feel) */
+            --bg-card: #FFFFFF;
+            --text-dark: #1A1A1A;      /* High Readability Black */
+            --accent-gold: #D4AF37;    /* Subtle Gold (Trust) */
+            --shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{background:#fcfaf8;color:#333;}nav{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:20px 10%;box-shadow:0 2px 10px rgba(0,0,0,0.1);position:sticky;top:0;z-index:1000;} .logo{font-size:24px;font-weight:bold;color:#d35400;} nav ul{display:flex;list-style:none;} nav ul li{margin-left:25px;} nav ul li a{text-decoration:none;color:#333;font-weight:500;position:relative;transition:0.3s;}
+
+.logo { font-size: 22px; font-weight: 800; color: var(--secondary); text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+
+ nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 600; transition: 0.3s; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        nav ul li a:hover { color: var(--primary); }
+
+
+ .hero{height:85vh;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1504674900247-0877df9cc836');background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;padding:0 20px;} .hero h1{font-size:3.5rem;animation:fadeIn 2s;} .hero p{margin:15px 0;}
+
+.cta-group{display:flex;gap:15px;flex-wrap:wrap;} .btn{padding:12px 25px;border-radius:30px;text-decoration:none;font-weight:bold;transition:0.3s;display:inline-block;} .btn-primary{background:#d35400;color:white;} .btn-primary:hover{transform:scale(1.1);background:#a04000;box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+
+.btn-swiggy{background:#fc8019;color:white;} .btn-swiggy:hover{transform:scale(1.1);background:#e56f00;box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+
+.btn-zomato{background:#cb202d;color:white;} .btn-zomato:hover{transform:scale(1.1);background:#a91b26;box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;padding:60px 10%;}
+
+.feat-card{background:white;padding:30px 20px;border-radius:15px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,0.08);transition:all 0.4s ease;position:relative;overflow:hidden;}
+
+.feat-icon{font-size:40px;display:block;margin-bottom:15px;}
+
+.feat-card:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 15px 35px rgba(0,0,0,0.2);}
+
+.feat-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg, transparent, rgba(211,84,0,0.2), transparent);transition:0.5s;}
+                 .feat-card:hover::before{left:100%;}
+
+.featured{padding:60px 10%;text-align:center;} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;}
+
+.card{background:white;border-radius:10px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.08);transition:0.3s;text-align:left;} .card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 12px 30px rgba(0,0,0,0.25);} .card img{width:100%;height:200px;object-fit:cover;} .card-content{padding:15px;} .card h3{margin-bottom:8px;} .price{color:#007bff;font-weight:bold;font-size:18px;margin-top:5px;}
+
+.card a{text-decoration:none;color:inherit;display:block;}
+
+.search{padding:50px 10%;text-align:center;}
+.search h2{margin-bottom:20px;}
+.search input{width:60%;max-width:500px;padding:14px;border-radius:30px;border:1px solid #ccc;outline:none;font-size:16px;transition:0.3s;}
+.search input:focus{border-color:#d35400;box-shadow:0 0 12px rgba(211,84,0,0.3);}
+
+.reviews{padding:60px 10%;text-align:center;}
+.review-container{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:20px;}
+.review-card{background:white;padding:20px;border-radius:15px;width:260px;box-shadow:0 4px 15px rgba(0,0,0,0.1);transition:0.3s;}
+.review-card p{margin:10px 0;color:#555;}
+.review-card h4{color:#d35400;}
+.review-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 12px 30px rgba(0,0,0,0.25);}
+
+ footer { background: var(--secondary); color: rgba(255,255,255,0.7); padding: 80px 10% 30px; text-align: center; }
+        footer h2 { color: white; margin-bottom: 20px; }
+        .social-icons { font-size: 32px; margin-bottom: 30px; display: block; word-spacing: 20px; color: var(--accent-gold); }
+
+ @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;}}
+
+ @media(max-width:600px){ .hero h1{font-size:2rem;} nav{flex-direction:column;} nav ul{margin-top:10px;} } </style></head><body>
+<nav>
+<div class="logo">🍽 THE GRAND <span>BISTRO</span></div>
+<ul>
+<li><a href="index.html">🏠 HOME</a></li>
+<li><a href="menu.html">📜 MENU</a></li>
+<li><a href="about.html">🥗 ABOUT US</a></li>
+<li><a href="contact.html">📞 CONTACT US</a></li>
+</ul>
+</nav><header class="hero">
+<h1>🍔 Delicious Food, Delivered Fast</h1>
+<p>Experience authentic flavors at your home</p>
+<div class="cta-group">
+<a href="#" class="btn btn-primary">📖 Explore Menu</a>
+<a href="https://www.swiggy.com" target="_blank" class="btn btn-swiggy">🛵 Order on Swiggy</a>
+<a href="https://www.zomato.com" target="_blank" class="btn btn-zomato">🍅 Order on Zomato</a>
+</div>
+</header>
+
+<section class="search">
+  <h2>🔍 Find Your Craving </h2>
+  <input type="text" placeholder="Search our signature dishes...">
+</section>
+<section class="features">
+<div class="feat-card">
+            <span class="feat-icon">👨‍🍳</span>
+            <h3>Top Chefs</h3>
+            <p>Expertly crafted by world-class culinary artists.</p>
+        </div>
+        <div class="feat-card">
+            <span class="feat-icon">🥦</span>
+            <h3>Fresh Organic</h3>
+            <p>We use 100% fresh and organic farm products.</p>
+        </div>
+        <div class="feat-card">
+            <span class="feat-icon">🚀</span>
+            <h3>Super Fast</h3>
+            <p>Delivery within 30 mins or it's free!</p>
+        </div>
+</section><section class="featured">
+<h2>🍴 Our Best Sellers 🔥</h2><br>
+<div class="grid"><a href="https://www.zomato.com" target="_blank" class="card">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<div class="card-content">
+<h3>Butter Chicken</h3>
+<p>Rich creamy taste 🍛</p>
+<p class="price">₹250</p>
+</div>
+</a><a href="https://www.swiggy.com" target="_blank" class="card">
+<img src="https://images.unsplash.com/photo-1605478371310-a9f1e96b4ff4">
+<div class="card-content">
+<h3>Pizza</h3>
+<p>Cheesy & hot 🔥</p>
+<p class="price">₹180</p>
+</div>
+</a><a href="https://www.zomato.com" target="_blank" class="card">
+<img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+<div class="card-content">
+<h3>Burger</h3>
+<p>Juicy & tasty 🍔</p>
+<p class="price">₹150</p>
+</div>
+</a></div>
+</section>
+
+<section class="reviews">
+  <h2>⭐ Customer Reviews</h2>
+  <div class="review-container">
+    <div class="review-card">
+      ⭐⭐⭐⭐⭐
+      <p>"Amazing food and fast delivery!"</p>
+      <h4>– Parth</h4>
+    </div>
+    <div class="review-card">
+      ⭐⭐⭐⭐
+      <p>"Very delicious food."</p>
+      <h4>– Dhanashri</h4>
+    </div>
+    <div class="review-card">
+      ⭐⭐⭐⭐⭐
+      <p>"Best restaurant experience!"</p>
+      <h4>– Neel</h4>
+    </div>
+  </div>
+</section>
+<footer>
+<span class="social-icons">ⓕ 🅾 𝕏 𝕚</span>
+        <h2>THE GRAND BISTRO</h2>
+        <p>Copyright © 2026. Defining the future of dining excellence.</p>
+        <p style="margin-top:10px;">📍 Near Karad bus-stand, Karad - 415 110 | 📞 +91 84599 34873</p>
+</footer></body>
+</html>

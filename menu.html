@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | The Grand Bistro 🍷</title>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C0392B;
+            --secondary: #2C3E50;
+            --bg-body: #FDFCF0;
+            --bg-card: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --accent-gold: #D4AF37;
+            --shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg-body); color: var(--text-dark); }
+
+        /* NAVIGATION (Matching Home/About) */
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-size: 22px; font-weight: 800; color: var(--secondary); text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 600; transition: 0.3s; font-size: 14px; text-transform: uppercase; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* MENU HEADER */
+        .menu-header {
+            text-align: center;
+            padding: 80px 10% 40px;
+            background: white;
+        }
+        .menu-header h1 { font-size: 42px; color: var(--secondary); margin-bottom: 10px; }
+        .menu-header p { color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* FILTER TABS (Pure CSS) */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: white;
+            position: sticky;
+            top: 70px;
+            z-index: 900;
+            border-bottom: 1px solid #eee;
+        }
+        .filter-btn {
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            color: var(--secondary);
+        }
+        .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* MENU GRID */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            padding: 60px 10%;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.4s;
+            position: relative;
+        }
+        .menu-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        
+        .menu-item img { width: 100%; height: 230px; object-fit: cover; }
+        
+        .item-info { padding: 25px; }
+        .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .item-header h3 { font-size: 20px; color: var(--secondary); }
+        .item-price { color: var(--primary); font-weight: 800; font-size: 18px; }
+        
+        .item-info p { font-size: 14px; color: #666; margin-bottom: 20px; }
+	
+	/* 1. Hide the ugly radio circles */
+        
+        .order-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .order-btn:hover { background: var(--primary); }
+
+        /* BADGE */
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-gold);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* FOOTER */
+        footer { background: var(--secondary); color: white; padding: 60px 10% 30px; text-align: center; }
+
+        @media (max-width: 768px) {
+            .filter-container { flex-wrap: wrap; }
+            .menu-grid { padding: 40px 5%; }
+        }
+/* Hide the radio buttons */
+input[name="filter"] {
+    display: none;
+}
+
+/* Style the tabs to look like professional buttons */
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 40px 0;
+}
+
+.filter-tabs label {
+    padding: 12px 24px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s all ease;
+}
+
+/* HIGHLIGHT ACTIVE TAB: When radio is checked, change label color */
+#tab-all:checked ~ .filter-tabs label[for="tab-all"],
+#tab-starter:checked ~ .filter-tabs label[for="tab-starter"],
+#tab-main:checked ~ .filter-tabs label[for="tab-main"],
+#tab-dessert:checked ~ .filter-tabs label[for="tab-dessert"],
+#tab-drink:checked ~ .filter-tabs label[for="tab-drink"] {
+    background: #E67E22;
+    color: white;
+    border-color: #E67E22;
+    box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+}
+
+/* FILTERING LOGIC: Hide items that don't match the selected radio */
+#tab-starter:checked ~ .menu-grid .menu-item:not(.starter),
+#tab-main:checked ~ .menu-grid .menu-item:not(.main),
+#tab-dessert:checked ~ .menu-grid .menu-item:not(.dessert),
+#tab-drink:checked ~ .menu-grid .menu-item:not(.drink) {
+    display: none;
+}
+
+/* Optional: Add a fade-in animation for when tabs change */
+.menu-item {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="index.html" class="logo">THE GRAND <span>BISTRO</span></a>
+        <ul>
+            <li><a href="index.html">🏠 HOME</a></li>
+            <li><a href="menu.html">📜 MENU</a></li>
+            <li><a href="about.html">🥗 ABOUT US</a></li>
+            <li><a href="contact.html">📞 CONTACT US</a></li>
+        </ul>
+    </nav>
+
+    <!-- HEADER -->
+    <section class="menu-header">
+        <p>Discover Gastronomy</p>
+        <h1>Our Signature Menu</h1>
+    </section>
+
+<section class="menu-container">
+    <!-- 1. HIDDEN CONTROLS (Must stay at the top) -->
+    <input type="radio" id="tab-all" name="filter" checked>
+    <input type="radio" id="tab-starter" name="filter">
+    <input type="radio" id="tab-main" name="filter">
+    <input type="radio" id="tab-dessert" name="filter">
+    <input type="radio" id="tab-drink" name="filter">
+
+    <!-- 2. THE TABS (Clickable Labels) -->
+    <div class="filter-tabs">
+        <label for="tab-all">All Dishes</label>
+        <label for="tab-starter">Starters</label>
+        <label for="tab-main">Main Course</label>
+        <label for="tab-dessert">Desserts</label>
+        <label for="tab-drink">Drinks</label>
+    </div>
+    <!-- MENU ITEMS -->
+    <div class="menu-grid">
+        <!-- Item 1 -->
+        <div class="menu-item main">
+            <span class="badge">Chef's Choice</span>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtYJ3nyRR5q3OYUEg4Z2KxUXLRXKsCBczcHA&s">
+            <div class="item-info">
+                <div class="item-header">
+                    <h3>Butter Chicken</h3>
+                    <span class="item-price">250</span>
+                </div>
+                <p>24-hour marinated chicken in a velvety makhani gravy.</p>
+                <a href="contact.html" class="order-btn">Order Now</a>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="menu-item main">
+	    <span class="badge"> Best seller </span>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBn6xRDJeBNndWiMn5OssYBf-tx1iNDNxmNQ&s">
+            <div class="item-info">
+                <div class="item-header">
+                    <h3>Truffle Pizza</h3>
+                    <span class="item-price">180</span>
+                </div>
+                <p>Wild mushrooms, truffle oil, and fresh garden basil.</p>
+                <a href="contact.html" class="order-btn">Order Now</a>
+            </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="menu-item main">
+	    <span class="badge"> Best seller </span>
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+            <div class="item-info">
+                <div class="item-header">
+                    <h3>Wagyu Burger</h3>
+                    <span class="item-price">150</span>
+                </div>
+                <p>Premium beef patty with smoked cheddar and brioche bun.</p>
+                <a href="contact.html" class="order-btn">Order Now</a>
+            </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="menu-item main">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1o1ZAwpaEsRfi6UEekeX3bFPpWGWdGxlqWQ&s">
+            <div class="item-info">
+                <div class="item-header">
+                    <h3>Grilled Lamb</h3>
+                    <span class="item-price">420</span>
+                </div>
+                <p>Succulent herb-crusted chops with rosemary reduction.</p>
+                <a href="contact.html" class="order-btn">Order Now</a>
+            </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="menu-item dessert">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX0U_8PM1JMbDAuaDUbisp28atAvCRvXU1mw&s">
+            <div class="item-info">
+                <div class="item-header">
+                    <h3>Velvet Mousse</h3>
+                    <span class="item-price">120</span>
+                </div>
+                <p>Dark Belgian chocolate with gold leaf garnish.</p>
+                <a href="contact.html" class="order-btn">Order Now</a>
+            </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="menu-item drink">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_WcV39CVonVBTgc90ZxicRoAfTPGDfZ5dtQ&s">
+            <div class="item-info">
+                <div class="item-header">
+                    <h3>Blue Lagoon</h3>
+                    <span class="item-price">90</span>
+                </div>
+                <p>Refreshing citrus blend with fresh mint and soda.</p>
+                <a href="contact.html" class="order-btn">Order Now</a>
+            </div>
+        </div>
+	<!-- Item 7: Paneer Tikka -->
+<div class="menu-item starters">
+    <span class="badge">Trending</span>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWJ33O8UMRwihKevmBmQeQFgti-jjqehARKg&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Paneer Tikka</h3>
+            <span class="item-price">180</span>
+        </div>
+        <p>Smoky tandoor-grilled cottage cheese with bell peppers.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 8: Peri Peri Fries -->
+<div class="menu-item starter">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd711D_HvSoM6EceJl0H7lrMc-BgTNSUWDFg&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Peri Peri Fries</h3>
+            <span class="item-price">110</span>
+        </div>
+        <p>Crispy golden fries tossed in our signature spicy dust.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+<!-- Item 9: Penne Alfredo -->
+<div class="menu-item main">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmtDrUwfliBxedZGTYXQ-38JzvuTad_L0zPQ&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Penne Alfredo</h3>
+            <span class="item-price">210</span>
+        </div>
+        <p>Creamy white sauce pasta with broccoli and mushrooms.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 10: Hyderabadi Biryani -->
+<div class="menu-item main">
+    <span class="badge">Chef's Special</span>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLw-rwLJFfxGGh5_Q3QC7MvZptY9E4NTQ3Nw&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Dum Biryani</h3>
+            <span class="item-price">320</span>
+        </div>
+        <p>Long-grain basmati rice layered with aromatic spices and tender meat.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+<!-- Item 11: Classic Cheesecake -->
+<div class="menu-item dessert">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwHaZcqJ-Az0BphV1tfSFxCwgZ5_71lCIiLA&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>New York Cheesecake</h3>
+            <span class="item-price">190</span>
+        </div>
+        <p>Rich and creamy cheesecake with a buttery graham cracker crust.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 12: Iced Hazelnut Latte -->
+<div class="menu-item drink">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJRrq4FqGfKqIsjQ9TyFpx6vs2XRj-G1f19A&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Hazelnut Latte</h3>
+            <span class="item-price">140</span>
+        </div>
+        <p>Freshly brewed espresso with chilled milk and hazelnut syrup.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+<!-- Item 13: Crispy Spring Rolls (Veg) -->
+<div class="menu-item starter">
+    <span class="badge">Crunchy</span>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC4pG5w76oE8eJURI9t4NKCHj8gOhPb2UShA&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Golden Spring Rolls</h3>
+            <span class="item-price">140</span>
+        </div>
+        <p>Hand-rolled pastry filled with garden veggies and glass noodles.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 14: Chicken Wings (Non-Veg) -->
+<div class="menu-item starter">
+    <span class="badge">Best Seller</span>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOJ3xJyCxFvK9xVlAcn-lVxxOBg5nmHnG1kw&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Smoky BBQ Wings</h3>
+            <span class="item-price">220</span>
+        </div>
+        <p>Tender chicken wings glazed in a honey-bourbon BBQ sauce.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 15: Garlic Mushrooms (Veg) -->
+<div class="menu-item starter">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgJxUBDi-uXV2C2_KMzJqonGl2JRvSFl52Lg&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Butter Garlic Mushrooms</h3>
+            <span class="item-price">160</span>
+        </div>
+        <p>Button mushrooms sautéed with fresh garlic and parsley.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 16: Fish Fingers (Non-Veg) -->
+<div class="menu-item starter">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmyNR9zXikomNcot9YNrTLfsUNBrkzpNA_jQ&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Crispy Fish Fingers</h3>
+            <span class="item-price">280</span>
+        </div>
+        <p>Panko-crusted river fish served with zesty tartar sauce.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 17: Brownie with Ice Cream -->
+<div class="menu-item dessert">
+    <span class="badge">Must Try</span>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4U-I3HsmwQwGnD4UlFO-jEZbl3nKnqiIUaw&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Sizzling Brownie</h3>
+            <span class="item-price">180</span>
+        </div>
+        <p>Warm walnut brownie topped with vanilla bean ice cream and fudge.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 18: Tiramisu -->
+<div class="menu-item dessert">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXLxYKjah1tuYTzRFnaYtWULbMTZ_2tUfS9w&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Classic Tiramisu</h3>
+            <span class="item-price">210</span>
+        </div>
+        <p>Espresso-soaked ladyfingers layered with mascarpone cream.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 19: Fruit Parfait -->
+<div class="menu-item dessert">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy6dLXvZ3t6-SwhMZGmD31QiIG9Y8_gxCCJw&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Berry Parfait</h3>
+            <span class="item-price">150</span>
+        </div>
+        <p>Greek yogurt layered with seasonal berries and honey granola.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+<!-- Item 20: Gulab Jamun with Rabri -->
+<div class="menu-item dessert">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZLtmBF68Adhmj8jpScrtV806811frP6QD6Q&s">
+    <div class="item-info">
+        <div class="item-header">
+            <h3>Royal Gulab Jamun</h3>
+            <span class="item-price">130</span>
+        </div>
+        <p>Soft saffron-infused dumplings served with chilled creamy rabri.</p>
+        <a href="contact.html" class="order-btn">Order Now</a>
+    </div>
+</div>
+
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <h2>THE GRAND BISTRO</h2><br>
+        <p>© 2026. The fine art of dining.</p>
+        <p style="margin-top:10px; font-size:12px; opacity:0.6;">All prices are inclusive of GST.</p>
+    </footer>
+
+</body>
+</html>

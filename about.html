@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | The Grand Bistro 🍷</title>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        /* 1. PROFESSIONAL COLOR PALETTE */
+        :root {
+            --primary: #C0392B;        /* Deep Crimson */
+            --secondary: #2C3E50;      /* Midnight Blue */
+            --bg-body: #FDFCF0;        /* Warm Cream */
+            --bg-card: #FFFFFF;
+            --text-dark: #1A1A1A;      /* Soft Black */
+            --accent-gold: #D4AF37;    /* Muted Gold */
+            --shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg-body); color: var(--text-dark); line-height: 1.6; }
+
+        /* 2. NAVIGATION (Matching Home) */
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-size: 22px; font-weight: 800; color: var(--secondary); text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 600; transition: 0.3s; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* 3. ABOUT HERO */
+        .about-hero {
+            height: 45vh;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
+                        url('https://images.unsplash.com');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .about-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
+        .about-hero p { font-size: 1.1rem; color: var(--accent-gold); letter-spacing: 2px; text-transform: uppercase; }
+
+        /* 4. OUR STORY SECTION */
+        .story-container { padding: 100px 10%; display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
+        .story-text { flex: 1; min-width: 350px; }
+        .story-text h2 { font-size: 32px; color: var(--secondary); margin-bottom: 25px; }
+        .story-text h2 span { color: var(--primary); }
+        .story-text p { font-size: 17px; color: #555; margin-bottom: 20px; text-align: justify; }
+
+        .story-image { flex: 1; min-width: 350px; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 8px solid white; }
+        .story-image img { width: 100%; display: block; transition: 0.6s ease; }
+        .story-image:hover img { transform: scale(1.05); }
+
+        /* 5. PROFESSIONAL STATS SECTION */
+        .stats-banner { background: var(--secondary); padding: 80px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center; color: white; }
+        .stat-item h3 { font-size: 45px; color: var(--accent-gold); margin-bottom: 5px; }
+        .stat-item p { text-transform: uppercase; font-size: 13px; letter-spacing: 1px; opacity: 0.8; }
+
+        /* 6. MISSION SECTION */
+        .mission { padding: 100px 10%; text-align: center; background: white; }
+        .mission-box { max-width: 800px; margin: 0 auto; padding: 40px; border: 1px solid #eee; border-radius: 8px; transition: 0.4s; }
+        .mission-box:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow); }
+        .mission h4 { color: var(--primary); text-transform: uppercase; margin-bottom: 15px; }
+
+        /* 7. FOOTER */
+        footer { background: var(--secondary); color: rgba(255,255,255,0.7); padding: 60px 10% 30px; text-align: center; }
+        footer h2 { color: white; margin-bottom: 15px; }
+
+        /* MOBILE RWD */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; padding: 20px; }
+            nav ul { margin-top: 20px; }
+            .story-container { padding: 50px 5%; text-align: center; }
+            .story-text { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION (Same as Home) -->
+    <nav>
+        <a href="index.html" class="logo">THE GRAND <span>BISTRO</span></a>
+        <ul>
+            <li><a href="index.html">🏠 HOME</a></li>
+            <li><a href="menu.html">📜 MENU</a></li>
+            <li><a href="about.html">🥗 ABOUT US</a></li>
+            <li><a href="contact.html">📞 CONTACT US</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header class="about-hero">
+        <div>
+            <p>Fine Dining Since 2010</p>
+            <h1>Our Culinary Heritage 🍷</h1>
+        </div>
+    </header>
+
+    <!-- STORY -->
+    <section class="story-container">
+        <div class="story-text">
+            <h2>Crafting <span>Memories</span> One Plate at a Time</h2>
+            <p>Founded on the principles of excellence and authenticity, The Grand Bistro began as a visionary project to redefine urban dining. We believe that a great meal is a symphony of fresh ingredients, time-honored techniques, and creative passion.</p>
+            <p>Our kitchen is lead by award-winning chefs who source ingredients daily from local sustainable farms. Every sauce is simmered to perfection, and every spice blend is toasted in-house to ensure an experience that is truly world-class.</p>
+        </div>
+        <div class="story-image">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlAcXV9mrXkzNzdeF5m9tn5IN6BV1WyQqXgQ&s">
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-banner">
+        <div class="stat-item">
+            <h3>16+</h3>
+            <p>Years of Service</p>
+        </div>
+        <div class="stat-item">
+            <h3>42</h3>
+            <p>Signature Dishes</p>
+        </div>
+        <div class="stat-item">
+            <h3>12</h3>
+            <p>Culinary Awards</p>
+        </div>
+        <div class="stat-item">
+            <h3>100%</h3>
+            <p>Organic Sourced</p>
+        </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="mission">
+        <div class="mission-box">
+            <h4>Our Mission</h4>
+            <p>"To provide an unparalleled gourmet experience that celebrates the art of cooking while maintaining the highest standards of hospitality and sustainability."</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <h2>THE GRAND BISTRO</h2>
+        <p>© 2026 The Grand Bistro Excellence. All Rights Reserved.</p>
+        <p style="margin-top:10px; font-size: 13px;">Defining the standard of premium dining.</p>
+    </footer>
+
+</body>
+</html>

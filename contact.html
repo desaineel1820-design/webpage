@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Join | The Grand Bistro</title>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --brand: #E67E22; /* Sophisticated Amber */
+            --dark: #0F172A;  /* Deep Navy/Slate */
+            --text-main: #334155;
+            --text-light: #64748B;
+            --bg-soft: #F8FAFC;
+            --white: #FFFFFF;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-soft);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* MODERN NAV */
+        nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--dark);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span { color: var(--brand); }
+
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover { color: var(--brand); }
+
+        /* CONTACT LAYOUT */
+        .container {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .info-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .info-header p {
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            transform: translateX(10px);
+            border-color: var(--brand);
+        }
+
+        .icon-box {
+            width: 45px;
+            height: 45px;
+            background: rgba(230, 126, 34, 0.1);
+            color: var(--brand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        /* AUTH CARD & TOGGLE LOGIC */
+        #form-toggle { display: none; }
+
+        .auth-wrapper {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.04);
+            text-align: center;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 1.2rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 1.5px solid #E2E8F0;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .input-group input:focus {
+            border-color: var(--brand);
+            background: #FFFAF5;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 1rem;
+            background: var(--dark);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--brand);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(230, 126, 34, 0.2);
+        }
+
+        /* Toggle Views */
+        .login-view, .signup-view { display: none; }
+
+        #form-toggle:checked ~ .auth-wrapper .login-view { display: block; }
+        #form-toggle:not(:checked) ~ .auth-wrapper .signup-view { display: block; }
+
+        .switch-link {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .switch-link label {
+            color: var(--brand);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 5rem;
+            padding: 4rem 8% 2rem;
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; gap: 3rem; }
+            nav { padding: 1rem 5%; }
+            nav ul { display: none; } /* Simplified for demo */
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">THE GRAND <span>BISTRO</span></a>
+        <ul>
+            <li><a href="index.html">🏠 HOME</a></li>
+            <li><a href="menu.html">📜 MENU</a></li>
+            <li><a href="about.html">🥗 ABOUT US</a></li>
+            <li><a href="comtact.html">📞 CONTACT US</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Text Side -->
+        <div class="info-side">
+            <div class="info-header">
+                <h1>Let’s Connect.</h1>
+                <p>Have a question about our menu or want to book a private event? Reach out and our team will get back to you shortly.</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon-box">📍</div>
+                <div>
+                    <div style="font-weight: 800; color: var(--dark);">Our Location</div>
+                    <div style="color: var(--text-light); font-size: 0.9rem;">Near Karad Bus Stand, Karad - 415 110</div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon-box">📞</div>
+                <div>
+                    <div style="font-weight: 800; color: var(--dark);">Phone Support</div>
+                    <div style="color: var(--text-light); font-size: 0.9rem;">+91 84599 34873</div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon-box">✉️</div>
+                <div>
+                    <div style="font-weight: 800; color: var(--dark);">Email Us</div>
+                    <div style="color: var(--text-light); font-size: 0.9rem;">hello@grandbistro.com</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Side -->
+        <div class="form-side">
+            <input type="checkbox" id="form-toggle">
+            
+            <div class="auth-wrapper">
+                <!-- Signup View -->
+                <div class="signup-view">
+                    <h2 style="margin-bottom: 0.5rem; color: var(--dark);">Create Account</h2>
+                    <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 0.9rem;">Join for exclusive tasting invites.</p>
+                    
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="John Doe">
+                    </div>
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="name@company.com">
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Min. 8 characters">
+                    </div>
+                    <button class="btn-primary">Create Account</button>
+                    <div class="switch-link">
+                        Already a member? <label for="form-toggle">Sign In</label>
+                    </div>
+                </div>
+
+                <!-- Login View -->
+                <div class="login-view">
+                    <h2 style="margin-bottom: 0.5rem; color: var(--dark);">Welcome Back</h2>
+                    <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 0.9rem;">Please enter your details.</p>
+                    
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="name@company.com">
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="••••••••">
+                    </div>
+                    <button class="btn-primary">Sign In</button>
+                    <div class="switch-link">
+                        New here? <label for="form-toggle">Create an account</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-logo">THE GRAND BISTRO</span>
+        <p style="font-size: 0.9rem; max-width: 400px; margin: 0 auto;">Exquisite dining experiences delivered with passion and precision since 2010.</p>
+        <div class="copyright">
+            &copy; 2026 The Grand Bistro. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
